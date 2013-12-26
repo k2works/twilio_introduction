@@ -73,12 +73,47 @@ HerokuにTwilioアプリケーションをデプロイする
 ### Gitレポジトリの作成 ###
 
     $ git add .
-    $ git commit -a -m "init"
+    $ git commit -a -m "セットアップ"
 
 ### Herokuにデプロイ ###
 
     $ heroku create
     $ git push heroku master
+    Fetching repository, done.
+    Counting objects: 15, done.
+    Compressing objects: 100% (10/10), done.
+    Writing objects: 100% (10/10), 2.04 KiB, done.
+    Total 10 (delta 3), reused 0 (delta 0)
+
+    -----> Ruby app detected
+    -----> Compiling Ruby/Rack
+    -----> Using Ruby version: ruby-1.9.3
+    -----> Installing dependencies using Bundler version 1.3.2
+           Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+           Fetching gem metadata from https://rubygems.org/..........
+           Fetching gem metadata from https://rubygems.org/..
+           Installing builder (3.2.2)
+           Installing multi_json (1.8.2)
+           Installing jwt (0.1.8)
+           Using rack (1.5.2)
+           Using rack-protection (1.5.1)
+           Using tilt (1.4.1)
+           Using sinatra (1.4.4)
+           Installing twilio-ruby (3.11.4)
+           Using bundler (1.3.2)
+           Your bundle is complete! It was installed into ./vendor/bundle
+           Bundle completed (6.49s)
+           Cleaning up the bundler cache.
+    -----> Discovering process types
+           Procfile declares types -> web
+           Default types for Ruby  -> console, rake
+
+    -----> Compressing... done, 11.6MB
+    -----> Launching... done, v4
+           http://shrouded-wave-8087.herokuapp.com deployed to Heroku
+
+    To git@heroku.com:shrouded-wave-8087.git
+       2b1ae01..8fbd12f  master -> master
 
 ### アプリケーションの確認 ###
 
@@ -94,3 +129,5 @@ HerokuにTwilioアプリケーションをデプロイする
 # 参照 #
 
 [Heroku](https://www.heroku.com/)
+
+[Twilio Docs - クイックスタート](https://jp.twilio.com/docs/quickstart)
