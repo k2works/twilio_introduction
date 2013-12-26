@@ -1,8 +1,8 @@
-Heroku入門
+Twilio入門
 ===================
 
 # 目的 #
-HerokuにRubyアプリケーションをでプロイする
+HerokuにTwilioアプリケーションをデプロイする
 
 # 前提 #
 | ソフトウェア   | バージョン   | 備考        |
@@ -38,14 +38,16 @@ HerokuにRubyアプリケーションをでプロイする
 ## <a name="chap3">アプリケーションのデプロイ ##
 
 ### アプリケーションの作成 ###
-+ [web.rb](web.rb)
++ [twiml-quickstart.rb](twiml-quickstart.rb)
 
         require 'sinatra'
-    
-        get '/' do
-            "Hello, world"
-        end
+        require 'twilio-ruby'
 
+        get '/hello-monkey' do
+          Twilio::TwiML::Response.new do |r|    
+            r.Say 'Hello Monkey'
+          end.text
+        end
 
 ### Gemfileの作成 ###
 + [Gemfile](Gemfile)
@@ -53,7 +55,8 @@ HerokuにRubyアプリケーションをでプロイする
         source "https://rubygems.org"
 
         ruby "1.9.3"
-        gem 'sinatra' 
+        gem 'sinatra'
+        gem 'twilio-ruby'
 
 + bundle installを実行
     
@@ -62,10 +65,6 @@ HerokuにRubyアプリケーションをでプロイする
 + [Procfile](Procfile)
 
         web: bundle exec ruby web.rb -p $PORT
-
-+ Rack appから直接デプロイする場合はconfig.ruを用意してProcfileは以下の内容になる。
-
-        web: bundle exec rackup config.ru -p $PORT
 
 + ローカルで動作を確認する
 
@@ -92,38 +91,6 @@ HerokuにRubyアプリケーションをでプロイする
 
     $ heroku open
 
-### ログを確認する ###
-
-    $ heroku logs
-    2013-12-12T01:58:52.156557+00:00 heroku[api]: Enable Logplex by kakimomokuri@gmail.com
-    2013-12-12T01:58:52.189276+00:00 heroku[api]: Release v2 created by kakimomokuri@gmail.com
-    2013-12-12T02:01:26+00:00 heroku[slug-compiler]: Slug compilation started
-    2013-12-12T02:01:42+00:00 heroku[slug-compiler]: Slug compilation finished
-
-### コンソール ###
-
-    $ heroku run console
-    Running `console` attached to terminal... up, run.5214
-    irb(main):001:0> 
-
-### Rake ###
-
-    $ heroku run rake db:migrate
-
-### データベースを使う ###
-
-    $ heroku addons:add heroku-postgresql:dev
-
-+ Gemfileに追加
-
-        gem 'pg'
-
 # 参照 #
 
 [Heroku](https://www.heroku.com/)
-
-[Getting Started with Heroku](https://devcenter.heroku.com/articles/quickstart)
-
-[Getting Started with Ruby on Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby)
-
-[簡単！３分でGithub上のレポジトリをherokuにpushする方法](http://dqn.sakusakutto.jp/2012/04/github-heroku-push.html)
