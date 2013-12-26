@@ -64,7 +64,7 @@ HerokuにTwilioアプリケーションをデプロイする
 
 + [Procfile](Procfile)
 
-        web: bundle exec ruby web.rb -p $PORT
+        web: bundle exec ruby twiml-quickstart.rb -p $PORT
 
 + ローカルで動作を確認する
 
